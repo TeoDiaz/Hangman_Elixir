@@ -1,11 +1,11 @@
 defmodule Dictionary do
 
-  def random_world do
-    world_list()
+  def random_word do
+    word_list()
     |> Enum.random()
   end
 
-  def world_list do
+  def word_list do
     "../assets/words.txt"
     |> Path.expand(__DIR__)
     |> File.read!()
