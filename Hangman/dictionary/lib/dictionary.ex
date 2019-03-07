@@ -6,12 +6,11 @@ defmodule Dictionary do
   end
 
   def world_list do
-    "assets/words.txt"
+    "../assets/words.txt"
+    |> Path.expand(__DIR__)
     |> File.read!()
     |> String.split(~r/\n/)
   end
-
-end
 
 @doc """
   def random_word() do
@@ -23,3 +22,6 @@ end
     list = String.split(contents,  ~r/\n/)
   end
   """
+end
+
+
