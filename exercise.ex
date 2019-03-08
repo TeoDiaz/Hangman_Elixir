@@ -37,4 +37,26 @@ defmodule Lists do
   def even_length?([_head | tail]) do
     !even_length?(tail)
   end
+
+  @doc """
+  I think MapSet is probably the correct container for our used letters. I was also swayed to use it so I could show you a new library.
+
+Just as a matter of interest, create a new temporary branch and change our implementation to use a list instead.
+
+That shouldn't have been too difficult. So what's the benefit (if any) of using MapSet?
+  """
+
+  def make_move(%__MODULE__{game_state: state} = game, _guess)
+      when state in [:won, :lost] do
+    {game, tally(game)}
+  end
+
+  def make_move(game, guess) do
+    game =
+      MapSet.member?(game.used, guess) &&
+        struct(game, game_state: :already_used) ||
+        struct(game, used: MapSet.put(game.used, guess))
+    {game, tally(game)}
+  end
+
 end
