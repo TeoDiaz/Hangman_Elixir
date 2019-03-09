@@ -1,6 +1,6 @@
 defmodule TextClient.Interact do
 
-  alias TextClient.{PLayer,State}
+  alias TextClient.{Player,State}
 
   def start() do
     Hangman.new_game()
