@@ -1,18 +1,14 @@
-defmodule SocketGallowsWeb.Endpoint do
+defmodule SocketGallows.Web.Endpoint do
   use Phoenix.Endpoint, otp_app: :socket_gallows
 
-  socket "/socket", SocketGallowsWeb.UserSocket,
-    websocket: true,
-    longpoll: false
+  socket "/socket", SocketGallows.Web.UserSocket
 
   # Serve at "/" the static files from "priv/static" directory.
   #
-  # You should set gzip to true if you are running phx.digest
+  # You should set gzip to true if you are running phoenix.digest
   # when deploying your static files in production.
   plug Plug.Static,
-    at: "/",
-    from: :socket_gallows,
-    gzip: false,
+    at: "/", from: :socket_gallows, gzip: false,
     only: ~w(css fonts images js favicon.ico robots.txt)
 
   # Code reloading can be explicitly enabled under the
@@ -29,7 +25,7 @@ defmodule SocketGallowsWeb.Endpoint do
   plug Plug.Parsers,
     parsers: [:urlencoded, :multipart, :json],
     pass: ["*/*"],
-    json_decoder: Phoenix.json_library()
+    json_decoder: Poison
 
   plug Plug.MethodOverride
   plug Plug.Head
@@ -40,7 +36,19 @@ defmodule SocketGallowsWeb.Endpoint do
   plug Plug.Session,
     store: :cookie,
     key: "_socket_gallows_key",
-    signing_salt: "8lFjhlP2"
+    signing_salt: "Degf6PK/"
 
-  plug SocketGallowsWeb.Router
+  plug SocketGallows.Web.Router
+
+  @doc """
+  Dynamically loads configuration from the system environment
+  on startup.
+
+  It receives the endpoint configuration from the config files
+  and must return the updated configuration.
+  """
+  def load_from_system_env(config) do
+    port = System.get_env("PORT") || raise "expected the PORT environment variable to be set"
+    {:ok, Keyword.put(config, :http, [:inet6, port: port])}
+  end
 end

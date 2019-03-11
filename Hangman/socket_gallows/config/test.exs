@@ -2,8 +2,8 @@ use Mix.Config
 
 # We don't run a server during test. If one is required,
 # you can enable the server option below.
-config :socket_gallows, SocketGallowsWeb.Endpoint,
-  http: [port: 4002],
+config :socket_gallows, SocketGallows.Web.Endpoint,
+  http: [port: 4001],
   server: false
 
 # Print only warnings and errors during test

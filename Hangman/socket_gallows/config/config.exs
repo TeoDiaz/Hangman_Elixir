@@ -3,25 +3,21 @@
 #
 # This configuration file is loaded before any dependency and
 # is restricted to this project.
-
-# General application configuration
 use Mix.Config
 
 # Configures the endpoint
-config :socket_gallows, SocketGallowsWeb.Endpoint,
+config :socket_gallows, SocketGallows.Web.Endpoint,
   url: [host: "localhost"],
-  secret_key_base: "bWyYRR6Hlx4qG1jUqdc3LeGbjOnJip09C9mO1btRBkdj6aa6wsK+a2JxxhsT4Lk6",
-  render_errors: [view: SocketGallowsWeb.ErrorView, accepts: ~w(html json)],
-  pubsub: [name: SocketGallows.PubSub, adapter: Phoenix.PubSub.PG2]
+  secret_key_base: "KtigD/dCrLpdyF5HkAh7EKa09alQBredg9TAEktNCJe/qv5ZzyEo1Noj7cxivcRp",
+  render_errors: [view: SocketGallows.Web.ErrorView, accepts: ~w(html json)],
+  pubsub: [name: SocketGallows.PubSub,
+           adapter: Phoenix.PubSub.PG2]
 
 # Configures Elixir's Logger
 config :logger, :console,
   format: "$time $metadata[$level] $message\n",
   metadata: [:request_id]
 
-# Use Jason for JSON parsing in Phoenix
-config :phoenix, :json_library, Jason
-
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
-import_config "#{Mix.env()}.exs"
+import_config "#{Mix.env}.exs"
