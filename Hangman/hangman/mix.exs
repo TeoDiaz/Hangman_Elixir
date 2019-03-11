@@ -26,3 +26,4 @@ defmodule Hangman.MixProject do
     ]
   end
 end
+
